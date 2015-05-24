@@ -8,8 +8,9 @@ import javax.swing.JPanel;
 
 public class ControlWindow implements ActionListener {
 	protected JButton startButton;
+	private Updater updater;
 	
-	public ControlWindow() {
+	public ControlWindow(Updater updater) {
 		JFrame frame = new JFrame("Internet of Mice");
 		InnerPanel panel = new InnerPanel(this);
 		panel.setOpaque(true);
@@ -17,12 +18,16 @@ public class ControlWindow implements ActionListener {
 		
 		frame.pack();
 		frame.setVisible(true);
+		
+		this.updater = updater;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals("start")) {
+			updater.start();
+			
 			startButton.setActionCommand("stop");
 			startButton.setText("Stop");
 			System.out.println("started");
