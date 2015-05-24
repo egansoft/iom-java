@@ -39,14 +39,17 @@ public class Updater {
 		        	
 		        	for(DataSnapshot pointSnapshot : dataSet.getChildren()) {
 			        	System.out.println("well you got this far");
-		        		double x = (Double) pointSnapshot.child("x").getValue();
-		        		double y = (Double) pointSnapshot.child("y").getValue();
-		        		double z = (Double) pointSnapshot.child("z").getValue();
-		        		int t = (int) (((Long) pointSnapshot.child("t").getValue())).longValue();
-		        		int b = (int) (((Long) pointSnapshot.child("b").getValue())).longValue();
-		        		
-		        		DataPoint dataPoint = new DataPoint(x,y,z,t,b);
-		        		queue.add(dataPoint);
+			        	try {
+			        		double x = (Double) pointSnapshot.child("x").getValue();
+			        		double y = (Double) pointSnapshot.child("y").getValue();
+			        		double z = (Double) pointSnapshot.child("z").getValue();
+			        		int t = (int) (((Long) pointSnapshot.child("t").getValue())).longValue();
+			        		int b = (int) (((Long) pointSnapshot.child("b").getValue())).longValue();
+			        		
+			        		DataPoint dataPoint = new DataPoint(x,y,z,t,b);
+			        		queue.add(dataPoint);
+			        		
+			        	} catch(Exception e) {}
 //		        		System.out.println(t);
 		        	}
 		        }
@@ -104,7 +107,16 @@ public class Updater {
 				}
 
 				last = current.t;
-				mouseMover.smoothMove(-((int)(current.x*10)), (int)(current.y*10));
+				
+				int dx = -((int)(current.x*10));
+				int dy = (int)(current.y*10);
+				
+				if(Math.abs(dx) < 5)
+					dx = 0;
+				if(Math.abs(dy) < 5)
+					dy = 0;
+				
+				mouseMover.smoothMove(dx, dy);
 
 				if(current.b == 1) {
 					mouseMover.leftPress();

@@ -41,21 +41,17 @@ public class MouseMover {
 	
 	public void leftPress() {
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 	}
 	
 	public void rightPress() {
 		robot.mousePress(InputEvent.BUTTON2_DOWN_MASK);
-		robot.mouseRelease(InputEvent.BUTTON2_DOWN_MASK);
 	}
 	
 	public void leftUnpress() {
-		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 	}
 	
 	public void rightUnpress() {
-		robot.mousePress(InputEvent.BUTTON2_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON2_DOWN_MASK);
 	}
 }
