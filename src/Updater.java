@@ -35,7 +35,6 @@ public class Updater {
 		        
 		        // Queue data
 		        for(DataSnapshot dataSet : snapshot.getChildren()) {
-//		        	DataSnapshot accelData = dataSet.child("dataPoints");
 		        	
 		        	for(DataSnapshot pointSnapshot : dataSet.getChildren()) {
 			        	System.out.println("well you got this far");
@@ -52,6 +51,7 @@ public class Updater {
 			        	} catch(Exception e) {}
 //		        		System.out.println(t);
 		        	}
+		        	
 		        }
 		        
 		        // Remove loaded data from firebase
