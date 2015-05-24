@@ -1,6 +1,7 @@
 import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 
 
 public class MouseMover {
@@ -19,37 +20,6 @@ public class MouseMover {
 	}
 	
 	public void smoothMove(int dx, int dy) {
-//		Complex algorithms that I figured out asleep that don't work
-//		if(dx > dy) {
-//			int mod, max;
-//			if(dy * 2 <= dx) {
-//				mod = (int) Math.ceil((double) dx / (double) dy);
-//				max = mod - dx + dy;
-//			} else {
-//				mod = dx/(dx-dy);
-//				max = 1;
-//			}
-//			
-//			for(int x=0;x<dx;x++) {
-//				int tdy = (x % mod < max) ? 1 : 0;
-//				moveMouse(1, tdy);
-//			}
-//		} else {
-//			int mod, max;
-//			if(dx * 2 <= dy) {
-//				mod = (int) Math.ceil((double) dy / (double) dx);
-//				max = mod - dy + dx;
-//			} else {
-//				mod = dy/(dy-dx);
-//				max = 1;
-//			}
-//			
-//			for(int y=0;y<dy;y++) {
-//				int tdx = (y % mod < max) ? 1 : 0;
-//				moveMouse(tdx, 1);
-//			}
-//		}
-//		System.out.println("dx: " + dx + ", dy: " + dy);
 		
 		if(Math.abs(dx) > Math.abs(dy)) {
 			for(int x=0;x<Math.abs(dx);x++) {
@@ -62,9 +32,30 @@ public class MouseMover {
 				moveMouse(tdx, sign(dy));
 			}
 		}
+		
 	}
 	
 	private int sign(int x) {
 		return (int) Math.signum((double) x);
+	}
+	
+	public void leftPress() {
+		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+	}
+	
+	public void rightPress() {
+		robot.mousePress(InputEvent.BUTTON2_DOWN_MASK);
+		robot.mouseRelease(InputEvent.BUTTON2_DOWN_MASK);
+	}
+	
+	public void leftUnpress() {
+		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+	}
+	
+	public void rightUnpress() {
+		robot.mousePress(InputEvent.BUTTON2_DOWN_MASK);
+		robot.mouseRelease(InputEvent.BUTTON2_DOWN_MASK);
 	}
 }

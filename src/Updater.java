@@ -43,10 +43,11 @@ public class Updater {
 		        		double y = (Double) pointSnapshot.child("y").getValue();
 		        		double z = (Double) pointSnapshot.child("z").getValue();
 		        		int t = (int) (((Long) pointSnapshot.child("t").getValue())).longValue();
+		        		int b = (int) (((Long) pointSnapshot.child("b").getValue())).longValue();
 		        		
-		        		DataPoint dataPoint = new DataPoint(x,y,z,t);
+		        		DataPoint dataPoint = new DataPoint(x,y,z,t,b);
 		        		queue.add(dataPoint);
-		        		System.out.println(t);
+//		        		System.out.println(t);
 		        	}
 		        }
 		        
@@ -75,10 +76,19 @@ public class Updater {
 	
 	private class DequeueThread implements Runnable {
 		public void run() {
-			boolean init = false;
+			boolean init = false, leftPressed = false, rightPressed = false;
 			int last = 0;
 			
 			while(true) {
+				if(leftPressed) {
+					mouseMover.leftUnpress();
+					leftPressed = false;
+				}
+				if(rightPressed) {
+					mouseMover.rightUnpress();
+					rightPressed = false;
+				}
+				
 				if(queue.isEmpty()){
 					sleep(100);
 					continue;
@@ -95,6 +105,14 @@ public class Updater {
 
 				last = current.t;
 				mouseMover.smoothMove(-((int)(current.x*10)), (int)(current.y*10));
+
+				if(current.b == 1) {
+					mouseMover.leftPress();
+					leftPressed = true;
+				} else if(current.b == 2) {
+					mouseMover.rightPress();
+					rightPressed = true;
+				}
 			}
 		}
 		
@@ -110,12 +128,14 @@ public class Updater {
 		public double y;
 		public double z;
 		public int t;
+		public int b;
 		
-		public DataPoint(double x, double y, double z, int t) {
+		public DataPoint(double x, double y, double z, int t, int b) {
 			this.x = x;
 			this.y = y;
 			this.z = z;
 			this.t = t;
+			this.b = b;
 		}
 	}
 }
