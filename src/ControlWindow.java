@@ -32,6 +32,8 @@ public class ControlWindow implements ActionListener {
 			startButton.setText("Stop");
 			System.out.println("started");
 		} else if(e.getActionCommand().equals("stop")) {
+			updater.stop();
+			
 			startButton.setActionCommand("start");
 			startButton.setText("Start");
 			System.out.println("stopped");
