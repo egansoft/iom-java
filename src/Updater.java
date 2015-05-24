@@ -2,6 +2,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import org.json.*;
 
 
 public class Updater {
@@ -9,8 +10,8 @@ public class Updater {
 	private MouseMover mouseMover;
 	
 	public Updater(String name, MouseMover mouseMover) {
-		this.name = name;
-		this.mouseMover = mouseMover;
+		this.name = name; // -Jq3CLpsjbANW3lzY7ui
+		this.mouseMover = mouseMover; 
 	}
 	
 	public void start() {

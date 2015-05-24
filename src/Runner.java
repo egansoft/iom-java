@@ -20,9 +20,8 @@ public class Runner {
 		
 		
 //		Demo:
-//		MouseMover mm = new MouseMover();
-//		for(int i=0;i<500;i++)
-//			mm.moveMouse(1, 1);
+		for(int i=0;i<200;i++)
+			mm.moveMouse(1, 1);
 	}
 
 }
